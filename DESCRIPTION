@@ -1,0 +1,32 @@
+Package: oras
+Title: Container Registeries as Content-Addressed Storage Using the 'oras' Client
+Version: 0.0.1
+Authors@R: c(person(
+              "Carl", "Boettiger", 
+              email = "cboettig@gmail.com", 
+              role = c("aut", "cre"),
+              comment = c(ORCID = "0000-0002-1642-628X")))
+Description: An R interface to the 'oras' client. The 'oras' client
+  provides a mechanism to interact with Open Container Initiative ('OCI')
+  container registeries as content-addressed storage. This allows users
+  to easily publish public or private data to any compliant container 
+  registry, such as the GitHub Container Registry.
+License: MIT + file LICENSE
+URL: https://github.com/cboettig/oras,
+    https://cboettig.github.io/oras/
+BugReports: https://github.com/cboettig/oras/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    fs,
+    glue,
+    tools,
+    utils,
+    processx,
+    archive
+Language: en-US

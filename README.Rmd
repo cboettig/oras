@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# oras
+
+An R wrapper to the [oras](https://oras.land) cli.
+
+## Quickstart
+
+
+```r
+install_github("cboettig/oras")
+```
+
+```{r include=FALSE}
+write.csv(mtcars, "mtcars.csv", row.names = FALSE)
+```
+
+```{r}
+library(oras)
+```
+
+```{r}
+oras_login()
+```
+
+```{r}
+oras_push("ghcr.io/cboettig/content-store/mtcars:v1", "mtcars.csv")
+```
+
+
+```{r include = FALSE}
+unlink("mtcars.csv")
+```
