@@ -2,6 +2,9 @@
 
 export(install_oras)
 export(oras)
+export(oras_blob_delete)
+export(oras_blob_fetch)
+export(oras_blob_push)
 export(oras_login)
 export(oras_logout)
 export(oras_pull)

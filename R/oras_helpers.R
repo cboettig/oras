@@ -17,7 +17,7 @@ oras_cp <- function(from, to, flags="", verbose = TRUE) {
 #' Push files to remote registry
 #' @param name of file in registry (optionally with tag or hash)
 #' @param file local file to push
-#' @param flags additional flags, see `oras_push("-h")`
+#' @param flags additional flags, see `oras("push -h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
 #' @examplesIf FALSE
@@ -29,6 +29,62 @@ oras_push <- function(name, file, flags="", verbose = TRUE) {
   cmd <- gsub("\\s+", " ", cmd)
   oras(cmd, verbose = verbose)
 }
+
+#' Pull objects from remote registry by hash
+#' @param name of registry and digest of blob, as `<name>@<digest>`
+#' @param output filename to write blob to on local disk
+#' @param flags additional flags, see `oras("blob fetch -h")`
+#' @inheritParams oras_cp
+#' @inherit oras return
+#' @examplesIf FALSE
+#' 
+#' sha <- "450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5"
+#' oras_blob_fetch(paste0("localhost:5000/hello@sha256:", sha), "mtcars.csv")
+#' 
+#' @export
+oras_blob_fetch <- function(name, output, flags="", verbose = TRUE) {
+  cmd <- paste("blob fetch", flags, name, "--output", output)
+  cmd <- gsub("\\s+", " ", cmd)
+  oras(cmd, verbose = verbose)
+}
+
+
+#' Push object blobs from remote registry by hash
+#' @param name of registry and optinal digest of blob, as `<name>@<digest>`
+#' @param file local file to push
+#' @param flags additional flags, see `oras("blob push -h")`
+#' @inheritParams oras_cp
+#' @inherit oras return
+#' @examplesIf FALSE
+#' 
+#' oras_blob_push(paste0("localhost:5000/hello"), "mtcars.csv")
+#' 
+#' @export
+oras_blob_push <- function(name, file, flags="", verbose = TRUE) {
+  cmd <- paste("blob push", flags, name, file)
+  cmd <- gsub("\\s+", " ", cmd)
+  oras(cmd, verbose = verbose)
+}
+
+
+#' delete objects from remote registry by hash
+#' @param name of registry and digest of blob, as `<name>@<digest>`
+#' @param flags additional flags, see `oras_pull("-h")`
+#' @inheritParams oras_cp
+#' @inherit oras return
+#' @examplesIf FALSE
+#' 
+#' sha <- "450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5"
+#' oras_blob_delete(paste0("localhost:5000/hello@sha256:", sha))
+#' 
+#' @export
+oras_blob_delete <- function(name, flags="", verbose = TRUE) {
+  cmd <- paste("blob delete", flags, name)
+  cmd <- gsub("\\s+", " ", cmd)
+  oras(cmd, verbose = verbose)
+}
+
+
 
 #' Pull files from remote registry
 #' @param name name (with tag or digest optional) of registry to pull from

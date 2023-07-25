@@ -11,7 +11,7 @@ oras_tag(name, new_tag, flags, verbose = TRUE)
 
 \item{new_tag}{additional tag to add}
 
-\item{flags}{additional flags, see \code{oras_push("-h")}}
+\item{flags}{additional flags, see \code{oras("push -h")}}
 
 \item{verbose}{show output messages? logical, TRUE}
 }

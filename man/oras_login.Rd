@@ -6,7 +6,7 @@
 \usage{
 oras_login(
   registry = "ghcr.io",
-  username = "",
+  username = Sys.getenv("GITHUB_TOKEN"),
   password = Sys.getenv("GITHUB_TOKEN"),
   flags = "",
   verbose = TRUE
@@ -15,7 +15,7 @@ oras_login(
 \arguments{
 \item{registry}{Address of the remote}
 
-\item{username}{username (optional if password is a token, e.g. for GH)}
+\item{username}{username (for GH, may be username or token)}
 
 \item{password}{password or token (e.g. GitHub Token with Packages scope)}
 
