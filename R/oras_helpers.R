@@ -143,7 +143,7 @@ oras_login <- function(registry = "ghcr.io",
 #' oras_logout()
 #' 
 #' @export
-oras_logout <- function(registry, verbose = TRUE) {
+oras_logout <- function(registry = "ghcr.io", verbose = TRUE) {
   cmd <- paste("logout", registry)
   oras(cmd, verbose = verbose)
   

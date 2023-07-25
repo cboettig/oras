@@ -4,7 +4,7 @@
 \alias{oras_logout}
 \title{Log out from a remote registry}
 \usage{
-oras_logout(registry, verbose = TRUE)
+oras_logout(registry = "ghcr.io", verbose = TRUE)
 }
 \arguments{
 \item{registry}{Address of the remote}

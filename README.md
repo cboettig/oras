@@ -55,6 +55,14 @@ library(oras)
 ```
 
 The default login is set to GitHub’s container registry, GHCR.
+Alternative providers can also be indicated. By default, this loads the
+`GITHUB_TOKEN` environmental variable – ensure that your token includes
+the “packages” scope for it to be able to work with GHCR (best practice
+would be to use a dedicated token with *only* packages scope). Instead
+of using an environmental variable, the user name and password can be
+provided as function arguments (but be sure not to accidentally disclose
+your password in shared code that way.) Alternatively, `--username` and
+`--password` flags are recognized by most `oras` commands.
 
 ``` r
 oras_login()
@@ -65,7 +73,7 @@ oras_login()
 oras_push("ghcr.io/cboettig/content-store/mtcars:v1", "mtcars.csv")
 #> Exists    450a97ba6b43 mtcars.csv
 #> Pushed [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:216d464dfaf07450b953d43440ccc854e16e960a4f97bb3711a10d70a631e700
+#> Digest: sha256:6603e0b18c0a561f8036a525e8269b630feeca232ea0506307e2ce2a37416181
 oras_blob_fetch("ghcr.io/cboettig/content-store/mtcars@sha256:450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5",
                 "cars.csv")
 #> 
@@ -80,7 +88,7 @@ oras_pull("ghcr.io/cboettig/content-store/mtcars:v1")
 #> Downloading 450a97ba6b43 mtcars.csv
 #> Downloaded  450a97ba6b43 mtcars.csv
 #> Pulled [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:216d464dfaf07450b953d43440ccc854e16e960a4f97bb3711a10d70a631e700
+#> Digest: sha256:6603e0b18c0a561f8036a525e8269b630feeca232ea0506307e2ce2a37416181
 ```
 
 What if we push a different dataset to this same namespace and tag?
@@ -89,7 +97,7 @@ What if we push a different dataset to this same namespace and tag?
 oras_push("ghcr.io/cboettig/content-store/mtcars:v1", "lynx.csv")
 #> Exists    c024f4e63aa1 lynx.csv
 #> Pushed [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:74205c7e5e4b894f204aac07a9933cb1707918bbf8c572509fd52e77bab93a57
+#> Digest: sha256:961b11aca9928a5042974091faacf54930ceb35c135f6caaf4153f0a128669ee
 ```
 
 Note that because the registry is content-based, if we push an object
@@ -105,7 +113,7 @@ oras_pull("ghcr.io/cboettig/content-store/mtcars:v1")
 #> Downloading c024f4e63aa1 lynx.csv
 #> Downloaded  c024f4e63aa1 lynx.csv
 #> Pulled [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:74205c7e5e4b894f204aac07a9933cb1707918bbf8c572509fd52e77bab93a57
+#> Digest: sha256:961b11aca9928a5042974091faacf54930ceb35c135f6caaf4153f0a128669ee
 
 oras_blob_fetch("ghcr.io/cboettig/content-store/mtcars@sha256:450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5",
                 output = "cars.csv")
@@ -155,6 +163,15 @@ sha256sum cars.csv
 #>   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 #>                                  Dload  Upload   Total   Spent    Left  Speed
 #>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-#>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1303  100  1303    0     0   2703      0 --:--:-- --:--:-- --:--:-- 56652
+#>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1303  100  1303    0     0   2481      0 --:--:-- --:--:-- --:--:-- 23690
 #> 450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5  cars.csv
+```
+
+Finally, we can log out, to make our connection secure until an
+authentication token is again provided. (For non-GHCR use, remember to
+specify the registry address)
+
+``` r
+oras_logout()
+#> 
 ```

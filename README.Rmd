@@ -46,7 +46,7 @@ write.csv(lynx, "lynx.csv", row.names = FALSE)
 library(oras)
 ```
 
-The default login is set to GitHub's container registry, GHCR.  
+The default login is set to GitHub's container registry, GHCR.  Alternative providers can also be indicated. By default, this loads the `GITHUB_TOKEN` environmental variable -- ensure that your token includes the "packages" scope for it to be able to work with GHCR (best practice would be to use a dedicated token with _only_ packages scope).  Instead of using an environmental variable, the user name and password can be provided as function arguments (but be sure not to accidentally disclose your password in shared code that way.)  Alternatively, `--username` and `--password` flags are recognized by most `oras` commands.
 
 ```{r}
 oras_login()
@@ -126,6 +126,12 @@ curl -fL --header "Authorization: Bearer QQ==" "https://ghcr.io/v2/cboettig/cont
 sha256sum cars.csv
 ```
 
+
+Finally, we can log out, to make our connection secure until an authentication token is again provided. (For non-GHCR use, remember to specify the registry address)
+
+```{r}
+oras_logout()
+```
 
 
 ```{r include = FALSE}
