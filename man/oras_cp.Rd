@@ -23,7 +23,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 copy artifacts from one target to another
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 oras_cp("localhost:5000/hello:v1", "localhost:5001/hello:v1")
 \dontshow{\}) # examplesIf}
 }

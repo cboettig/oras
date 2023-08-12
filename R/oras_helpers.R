@@ -5,7 +5,7 @@
 #' @param verbose show output messages? logical, TRUE
 #' @param flags see `oras_cp("-h")` for list of flags
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' oras_cp("localhost:5000/hello:v1", "localhost:5001/hello:v1")
 oras_cp <- function(from, to, flags="", verbose = TRUE) {
   
@@ -20,7 +20,7 @@ oras_cp <- function(from, to, flags="", verbose = TRUE) {
 #' @param flags additional flags, see `oras("push -h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' oras_push("localhost:5000/hello:v1", "hi.txt")
 #' @export
 oras_push <- function(name, file, flags="", verbose = TRUE) {
@@ -36,7 +36,7 @@ oras_push <- function(name, file, flags="", verbose = TRUE) {
 #' @param flags additional flags, see `oras("blob fetch -h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' 
 #' sha <- "450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5"
 #' oras_blob_fetch(paste0("localhost:5000/hello@sha256:", sha), "mtcars.csv")
@@ -55,7 +55,7 @@ oras_blob_fetch <- function(name, output, flags="", verbose = TRUE) {
 #' @param flags additional flags, see `oras("blob push -h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' 
 #' oras_blob_push(paste0("localhost:5000/hello"), "mtcars.csv")
 #' 
@@ -72,7 +72,7 @@ oras_blob_push <- function(name, file, flags="", verbose = TRUE) {
 #' @param flags additional flags, see `oras_pull("-h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' 
 #' sha <- "450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5"
 #' oras_blob_delete(paste0("localhost:5000/hello@sha256:", sha))
@@ -91,7 +91,7 @@ oras_blob_delete <- function(name, flags="", verbose = TRUE) {
 #' @param flags additional flags, see `oras_pull("-h")`
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' oras_pull("localhost:5000/hello:v1")
 #' @export
 oras_pull <- function(name, flags="", verbose = TRUE) {
@@ -108,7 +108,7 @@ oras_pull <- function(name, flags="", verbose = TRUE) {
 #' @param registry Address of the remote
 #' @inheritParams oras_cp
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' 
 #' # login to self-hosted system
 #' oras_login("localhost:5000", username = "u", password = "p")
@@ -139,7 +139,7 @@ oras_login <- function(registry = "ghcr.io",
 #' @param registry Address of the remote
 #' @inheritParams oras_login
 #' @inherit oras return
-#' @examplesIf FALSE
+#' @examplesIf interactive()
 #' oras_logout()
 #' 
 #' @export

@@ -19,7 +19,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 Log out from a remote registry
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 oras_logout()
 \dontshow{\}) # examplesIf}
 }

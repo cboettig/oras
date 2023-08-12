@@ -1,6 +1,7 @@
 
 
 #' install the oras client
+#' 
 #' @param os operating system
 #' @param arch architecture
 #' @param path destination where binary is installed.

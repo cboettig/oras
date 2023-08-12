@@ -42,8 +42,15 @@ write.csv(lynx, "lynx.csv", row.names = FALSE)
 
 ```
 
+
 ```{r}
 library(oras)
+```
+
+After loading the library, the appropriate oras client binary must be installed by explicit request (as per CRAN policy). Batch scripts should always call `install_oras()`, which will check if a valid version is installed and only install if needed (or if an upgrade is requested with `force=TRUE`). In interactive use, functions will prompt if the oras binary is not installed.
+
+```{r}
+install_oras()
 ```
 
 The default login is set to GitHub's container registry, GHCR.  Alternative providers can also be indicated. By default, this loads the `GITHUB_TOKEN` environmental variable -- ensure that your token includes the "packages" scope for it to be able to work with GHCR (best practice would be to use a dedicated token with _only_ packages scope).  Instead of using an environmental variable, the user name and password can be provided as function arguments (but be sure not to accidentally disclose your password in shared code that way.)  Alternatively, `--username` and `--password` flags are recognized by most `oras` commands.

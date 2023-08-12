@@ -18,17 +18,29 @@
 oras <- function(command, ..., path = bin_path(), verbose = TRUE) {
   
   binary <- fs::path(path, "oras")
-  if(!file.exists(binary)) {
-    install_oras(path = path)
+  
+  if (!file.exists(binary) && interactive()) {
+    proceed <- utils::askYesNo("Install the oras client?")
+    if (proceed) {
+      install_oras(path = path)
+    }
   }
   
   args <- strsplit(command, split = " ")[[1]]
   p <- processx::run(binary, args, ...)
   
-  if(p$timeout & verbose) warning(paste("request", command, "timed out"))
-  if(p$status != 0) stop(paste(p$stderr))
+  if (p$timeout & verbose) {
+    warning(paste("request", command, "timed out"))
+  }
   
-  if(verbose) message(paste0(p$stdout))
+  if (p$status != 0) {
+    stop(paste(p$stderr))
+  }
+  
+  if (verbose) {
+    message(paste0(p$stdout))
+  }
+  
   invisible(p)
 }
 

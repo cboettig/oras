@@ -21,7 +21,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 delete objects from remote registry by hash
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 sha <- "450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5"
 oras_blob_delete(paste0("localhost:5000/hello@sha256:", sha))

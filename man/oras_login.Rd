@@ -31,7 +31,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 Log in to a remote registry
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # login to self-hosted system
 oras_login("localhost:5000", username = "u", password = "p")

@@ -21,7 +21,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 Pull files from remote registry
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 oras_pull("localhost:5000/hello:v1")
 \dontshow{\}) # examplesIf}
 }

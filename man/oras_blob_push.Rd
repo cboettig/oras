@@ -23,7 +23,7 @@ Returns the list from \code{\link[processx:run]{processx::run()}}, with componen
 Push object blobs from remote registry by hash
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 oras_blob_push(paste0("localhost:5000/hello"), "mtcars.csv")
 \dontshow{\}) # examplesIf}
