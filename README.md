@@ -54,6 +54,17 @@ install_github("cboettig/oras")
 library(oras)
 ```
 
+After loading the library, the appropriate oras client binary must be
+installed by explicit request (as per CRAN policy). Batch scripts should
+always call `install_oras()`, which will check if a valid version is
+installed and only install if needed (or if an upgrade is requested with
+`force=TRUE`). In interactive use, functions will prompt if the oras
+binary is not installed.
+
+``` r
+install_oras()
+```
+
 The default login is set to GitHub’s container registry, GHCR.
 Alternative providers can also be indicated. By default, this loads the
 `GITHUB_TOKEN` environmental variable – ensure that your token includes
@@ -73,7 +84,7 @@ oras_login()
 oras_push("ghcr.io/cboettig/content-store/mtcars:v1", "mtcars.csv")
 #> Exists    450a97ba6b43 mtcars.csv
 #> Pushed [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:6603e0b18c0a561f8036a525e8269b630feeca232ea0506307e2ce2a37416181
+#> Digest: sha256:7646ba611c1f5e9552d457bdb462a2c9cd0e7eb50abbd7cdac9a63fde78991fd
 oras_blob_fetch("ghcr.io/cboettig/content-store/mtcars@sha256:450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5",
                 "cars.csv")
 #> 
@@ -88,7 +99,7 @@ oras_pull("ghcr.io/cboettig/content-store/mtcars:v1")
 #> Downloading 450a97ba6b43 mtcars.csv
 #> Downloaded  450a97ba6b43 mtcars.csv
 #> Pulled [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:6603e0b18c0a561f8036a525e8269b630feeca232ea0506307e2ce2a37416181
+#> Digest: sha256:7646ba611c1f5e9552d457bdb462a2c9cd0e7eb50abbd7cdac9a63fde78991fd
 ```
 
 What if we push a different dataset to this same namespace and tag?
@@ -97,7 +108,7 @@ What if we push a different dataset to this same namespace and tag?
 oras_push("ghcr.io/cboettig/content-store/mtcars:v1", "lynx.csv")
 #> Exists    c024f4e63aa1 lynx.csv
 #> Pushed [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:961b11aca9928a5042974091faacf54930ceb35c135f6caaf4153f0a128669ee
+#> Digest: sha256:6aa019d03a692f4275c9736c2ac22ed8ffed98055860d17180817549f27bf604
 ```
 
 Note that because the registry is content-based, if we push an object
@@ -113,7 +124,7 @@ oras_pull("ghcr.io/cboettig/content-store/mtcars:v1")
 #> Downloading c024f4e63aa1 lynx.csv
 #> Downloaded  c024f4e63aa1 lynx.csv
 #> Pulled [registry] ghcr.io/cboettig/content-store/mtcars:v1
-#> Digest: sha256:961b11aca9928a5042974091faacf54930ceb35c135f6caaf4153f0a128669ee
+#> Digest: sha256:6aa019d03a692f4275c9736c2ac22ed8ffed98055860d17180817549f27bf604
 
 oras_blob_fetch("ghcr.io/cboettig/content-store/mtcars@sha256:450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5",
                 output = "cars.csv")
@@ -162,8 +173,8 @@ curl -fL --header "Authorization: Bearer QQ==" "https://ghcr.io/v2/cboettig/cont
 sha256sum cars.csv
 #>   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 #>                                  Dload  Upload   Total   Spent    Left  Speed
-#>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-#>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1303  100  1303    0     0   2481      0 --:--:-- --:--:-- --:--:-- 23690
+#>   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#> 100  1303  100  1303    0     0   2688      0 --:--:-- --:--:-- --:--:--  2688
 #> 450a97ba6b438c6ea5bdf2aaac7eab0ecbbf812b5ff74b56f62dcf0a0c7eb0e5  cars.csv
 ```
 
